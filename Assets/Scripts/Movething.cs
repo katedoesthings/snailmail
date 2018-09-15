@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movething : MonoBehaviour {
-
+    public GameObject player;
+    public Rigidbody rb;
 	// Use this for initialization
 	void Start () {
-		
+        rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(Input.GetKeyDown("space"))
+        {
+            rb.velocity = Vector3.up * 10;
+        }
 	}
 }
