@@ -13,6 +13,8 @@ public class SnailMovement : MonoBehaviour {
 
     public int headSections = 2;
 
+    public int climbSections = 3;
+
     public Transform[] eyeStalks;
 
 	// Use this for initialization
@@ -22,20 +24,33 @@ public class SnailMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        var firstStuck = bodySections.FirstOrDefault(s => s.isStuck);
+
+
         Vector3 f = Camera.main.transform.forward;
-        if (ss.isStuck) {
-            f = Vector3.ProjectOnPlane(f, ss.gravityNormal);
+        Vector3 u = Camera.main.transform.up;
+        if (firstStuck) {
+            f = Vector3.ProjectOnPlane(f, firstStuck.stuckNormal);
+            u = Vector3.ProjectOnPlane(u, firstStuck.stuckNormal);
         }
+
+        if (u.sqrMagnitude > f.sqrMagnitude) {
+            
+            f = u;
+        }
+
         f = f.normalized;
         
         Vector3 v = Input.GetAxis("Horizontal") * Camera.main.transform.right + Input.GetAxis("Vertical") * f;
-        
+
+        if (!firstStuck) {
+            v *= 0.5f;
+        }
+
         ss.rb.AddForce(v * velocity, ForceMode.Acceleration);
 
-        var firstStuck = bodySections.FirstOrDefault(s => s.isStuck);
-
-        bool up = Input.GetButton("Jump") && firstStuck;
-        if (up) {
+        bool headUp = firstStuck && Input.GetButton("Jump");
+        if (headUp) {
             for (int i = 0; i < headSections; i++) {
                 bodySections[i].sticky = false;
                 bodySections[i].useGravity = false;
@@ -43,7 +58,9 @@ public class SnailMovement : MonoBehaviour {
             }
             ss.sticky = false;
             ss.useGravity = false;
-            ss.rb.AddForce(firstStuck.gravityNormal * 40);
+            Vector3 force = firstStuck.stuckNormal * 10 + firstStuck.transform.forward * 5;
+            force += firstStuck.stuckNormal * v.magnitude * 60;
+            ss.rb.AddForce(force);
         } else {
             ss.sticky = true;
             ss.useGravity = true;
@@ -54,8 +71,8 @@ public class SnailMovement : MonoBehaviour {
         }
 
         if (firstStuck) {
-            var u = firstStuck.gravityNormal;
-            ss.rb.AddTorque(Vector3.Cross(ss.transform.up, ss.isStuck ? ss.gravityNormal : Vector3.ProjectOnPlane(u, ss.transform.forward)) * 10);
+            var firstSuckUp = firstStuck.stuckNormal;
+            ss.rb.AddTorque(Vector3.Cross(ss.transform.up, ss.isStuck ? ss.stuckNormal : Vector3.ProjectOnPlane(firstSuckUp, ss.transform.forward)) * 10);
         }
 
 
@@ -71,8 +88,10 @@ public class SnailMovement : MonoBehaviour {
             lastSection.rb.AddForceAtPosition((curPosOnSection - lastPos) * connectionStrength, lastPos);
 
             var curUp = section.transform.up;
-
-            section.rb.AddTorque(Vector3.Cross(curUp, ss.isStuck ? ss.gravityNormal : Vector3.ProjectOnPlane(lastUp, section.transform.forward)) * 10);
+            if (section.sticky && !section.isStuck && section.potentialGround.sqrMagnitude > 0) {
+                lastUp = section.potentialGround;
+            }
+            section.rb.AddTorque(Vector3.Cross(curUp, ss.isStuck ? ss.stuckNormal : Vector3.ProjectOnPlane(lastUp, section.transform.forward)) * 10);
 
             Debug.DrawLine(curPosOnSection, lastPos);
 
@@ -84,10 +103,35 @@ public class SnailMovement : MonoBehaviour {
                 section.rb.velocity = Vector3.Project(section.rb.velocity, section.transform.forward);
             }
         }
-
-        foreach (var stalk in eyeStalks) {
-            stalk.transform.right = -(firstStuck?.gravityNormal ?? Vector3.up);
-        }
         
-	}
+        Vector3 eyeUp = firstStuck?.transform.up ?? Vector3.up;
+        Vector3 eyeFwd = firstStuck?.transform.forward ?? transform.forward;
+        Vector3 eyeRight = Vector3.Cross(eyeUp, eyeFwd);
+        eyeFwd = Vector3.Cross(eyeRight, eyeUp);
+
+        Quaternion q = Quaternion.LookRotation(eyeRight, -eyeFwd);
+        eyeStalks[0].transform.rotation = Quaternion.RotateTowards(eyeStalks[0].transform.rotation, q, Time.deltaTime * 360);
+
+
+        Quaternion q2 = Quaternion.LookRotation(-eyeFwd, -eyeRight);
+        eyeStalks[1].transform.rotation = Quaternion.RotateTowards(eyeStalks[1].transform.rotation, q2, Time.deltaTime * 360);
+
+    }
+
+    private void LateUpdate() {
+        for (int i = bodySections.Length - 1; i >= 0; i--) {
+            var bs = bodySections[i];
+            var mn = bs.meshNode;
+            
+            if (mn) {
+                mn.transform.position = bs.transform.position;
+                mn.transform.rotation = bs.transform.rotation * bs.quatToApply;
+            }
+        }
+
+        if (ss.meshNode) {
+            ss.meshNode.transform.position = ss.transform.position;
+            ss.meshNode.transform.rotation = ss.transform.rotation * ss.quatToApply;
+        }
+    }
 }

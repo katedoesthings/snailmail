@@ -13,9 +13,10 @@ public class SnailSection : MonoBehaviour {
     public Rigidbody rb { get; private set; }
     private Material mat;
     public bool grounded { get; private set; }
+    public Vector3 groundNormal { get; private set; }
 
     public bool isStuck => sticky && grounded;
-    public Vector3 gravityNormal { get; private set; }
+    public Vector3 stuckNormal { get; private set; }
 
     public SnailSection head;
 
@@ -25,7 +26,8 @@ public class SnailSection : MonoBehaviour {
     public Transform meshNode;
 
     public Vector3 rotationToApply;
-    private Quaternion quatToApply;
+    public Quaternion quatToApply { get; private set; }
+    public Vector3 potentialGround { get; private set; }
 
     private float drag;
 
@@ -36,17 +38,31 @@ public class SnailSection : MonoBehaviour {
         drag = rb.drag;
         quatToApply = Quaternion.Euler(rotationToApply);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnCollisionStay(Collision collision) {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Default") && !isStuck && sticky) {
+            potentialGround = collision.contacts[0].normal;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision) {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Default")) {
+            potentialGround = Vector3.zero;
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         RaycastHit hit;
         grounded = false;
-        gravityNormal = Vector3.zero;
+        stuckNormal = Vector3.zero;
+        groundNormal = Vector3.zero;
         if (Physics.Raycast(new Ray(transform.position, -transform.up), out hit, raycastDistance + radius - 0.05f, 1)) {
-            bool sticc = sticky && (head == this || !head.isStuck || head.gravityNormal == hit.normal);
+            groundNormal = hit.normal;
+            bool sticc = sticky && (head == this || !head.isStuck || head.stuckNormal == hit.normal);
             if (sticc) {
-                gravityNormal = hit.normal;
-                rb.AddForceAtPosition(gravityNormal * -stickyStrength, transform.position - transform.up * radius, ForceMode.Acceleration);
+                stuckNormal = hit.normal;
+                rb.AddForceAtPosition(stuckNormal * -stickyStrength, transform.position - transform.up * radius, ForceMode.Acceleration);
             }
             grounded = true;
         }
@@ -58,11 +74,4 @@ public class SnailSection : MonoBehaviour {
 
         mat.color = grounded ? Color.white : Color.red;
 	}
-
-    private void LateUpdate() {
-        if (meshNode) {
-            meshNode.transform.position = transform.position;
-            meshNode.transform.rotation = transform.rotation * quatToApply;
-        }
-    }
 }
