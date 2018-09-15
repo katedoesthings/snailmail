@@ -3,51 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SnailMovement : MonoBehaviour {
-    private Rigidbody rb;
+    private SnailSection ss;
 
     public float velocity;
 
-    public Rigidbody[] bodySections;
-
-    public float gravityStrength = 9.8f;
-
-    private Vector3 gravityNormal;
+    public SnailSection[] bodySections;
 
 	// Use this for initialization
 	void Start () {
-        rb = GetComponent<Rigidbody>();
-        gravityNormal = Vector3.up;
+        ss = GetComponent<SnailSection>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
         Vector3 f = Camera.main.transform.forward;
-        f.y = 0;
+        if (ss.isStuck) {
+            f = Vector3.ProjectOnPlane(f, ss.gravityNormal);
+        }
         f = f.normalized;
-
+        
         Vector3 v = Input.GetAxis("Horizontal") * Camera.main.transform.right + Input.GetAxis("Vertical") * f;
-
-        rb.AddForce(v * velocity, ForceMode.Acceleration);
-        rb.AddForce(gravityNormal * -gravityStrength, ForceMode.Acceleration);
+        
+        ss.rb.AddForce(v * velocity, ForceMode.Acceleration);
 
 
         if (Input.GetButton("Jump")) {
-            rb.AddForce(Vector3.up * 12);
+            ss.sticky = bodySections[0].sticky = false;
+            ss.rb.AddForce(Vector3.up * 50);
+        } else {
+            ss.sticky = bodySections[0].sticky = true;
         }
         
-        var lastSection = rb;
-        var lastPos = rb.transform.position - rb.transform.forward * 0.5f;
-        var lastUp = rb.transform.up;
+        var lastSection = ss;
+        var lastPos = ss.rb.transform.position - ss.rb.transform.forward * 0.5f;
+        var lastUp = ss.rb.transform.up;
 
         foreach (var section in bodySections) {
             var curPosOnSection = section.transform.position + section.transform.forward * 0.5f;
-            section.AddForceAtPosition((lastPos - curPosOnSection) * 100, curPosOnSection);
-            lastSection.AddForceAtPosition((curPosOnSection - lastPos) * 100, lastPos);
+            section.rb.AddForceAtPosition((lastPos - curPosOnSection) * 100, curPosOnSection);
+            lastSection.rb.AddForceAtPosition((curPosOnSection - lastPos) * 100, lastPos);
 
             var curUp = section.transform.up;
-            section.AddTorque(Vector3.Cross(curUp, lastUp) * 10);
-            section.AddForce(gravityNormal * -gravityStrength, ForceMode.Acceleration);
+            section.rb.AddTorque(Vector3.Cross(curUp, lastUp) * 10);
 
             Debug.DrawLine(curPosOnSection, lastPos);
 
@@ -56,7 +53,7 @@ public class SnailMovement : MonoBehaviour {
             lastUp = curUp;
 
 
-            section.velocity = Vector3.Project(section.velocity, section.transform.forward);
+            section.rb.velocity = Vector3.Project(section.rb.velocity, section.transform.forward);
         }
         
 	}

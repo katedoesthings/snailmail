@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 281541333}
   - component: {fileID: 281541332}
   - component: {fileID: 281541331}
+  - component: {fileID: 281541336}
   m_Layer: 9
   m_Name: Sphere (3)
   m_TagString: Untagged
@@ -361,12 +362,27 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 281541330}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000016391276}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: -0.48, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
+--- !u!114 &281541336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 281541330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8e661f60de95a4086a9500f01b4b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 0.3
+  stickyStrength: 50
+  gravityStrength: 20
+  sticky: 1
 --- !u!1 &513646762
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +396,7 @@ GameObject:
   - component: {fileID: 513646763}
   - component: {fileID: 513646768}
   - component: {fileID: 513646767}
+  - component: {fileID: 513646769}
   m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
@@ -448,7 +465,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 513646762}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000016391276}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -465,13 +482,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6dee4e438319c4984cd0f1f5f5d540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 50
+  velocity: 60
   bodySections:
-  - {fileID: 1357346295}
-  - {fileID: 564488491}
-  - {fileID: 281541331}
-  - {fileID: 692221820}
-  gravityStrength: 9.8
+  - {fileID: 1357346296}
+  - {fileID: 564488492}
+  - {fileID: 281541336}
+  - {fileID: 692221825}
 --- !u!54 &513646768
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -487,6 +503,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &513646769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 513646762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8e661f60de95a4086a9500f01b4b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 0.3
+  stickyStrength: 50
+  gravityStrength: 20
+  sticky: 1
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   track: {fileID: 513646766}
-  distance: 5
+  distance: 10
 --- !u!1 &564488486
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +621,7 @@ GameObject:
   - component: {fileID: 564488489}
   - component: {fileID: 564488488}
   - component: {fileID: 564488491}
+  - component: {fileID: 564488492}
   m_Layer: 9
   m_Name: Sphere (2)
   m_TagString: Untagged
@@ -604,7 +636,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 564488486}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000016391276}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: -0.48, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -679,6 +711,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &564488492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 564488486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8e661f60de95a4086a9500f01b4b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 0.3
+  stickyStrength: 50
+  gravityStrength: 20
+  sticky: 1
 --- !u!1 &692221819
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,6 +738,7 @@ GameObject:
   - component: {fileID: 692221822}
   - component: {fileID: 692221821}
   - component: {fileID: 692221820}
+  - component: {fileID: 692221825}
   m_Layer: 9
   m_Name: Sphere (4)
   m_TagString: Untagged
@@ -774,12 +822,27 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 692221819}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000016391276}
-  m_LocalPosition: {x: 0, y: 0, z: 4}
+  m_LocalPosition: {x: 0, y: -0.48, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
+--- !u!114 &692221825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692221819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8e661f60de95a4086a9500f01b4b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 0.3
+  stickyStrength: 50
+  gravityStrength: 20
+  sticky: 1
 --- !u!1 &1357346290
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +855,7 @@ GameObject:
   - component: {fileID: 1357346293}
   - component: {fileID: 1357346292}
   - component: {fileID: 1357346295}
+  - component: {fileID: 1357346296}
   m_Layer: 9
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -806,7 +870,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1357346290}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.00000016391276}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: -0.48, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -881,6 +945,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1357346296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1357346290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8e661f60de95a4086a9500f01b4b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 0.3
+  stickyStrength: 50
+  gravityStrength: 20
+  sticky: 1
 --- !u!1 &2000494734
 GameObject:
   m_ObjectHideFlags: 0
