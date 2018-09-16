@@ -6,10 +6,12 @@ public class Checkpoint : MonoBehaviour {
     public static Checkpoint active { get; set; }
 
     public GameObject PlayerPrefab;
-
+    public AudioSource sound;
+    
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<SnailMovement>()) {
             active = this;
+            sound.Play();
         }
     }
 
