@@ -48,4 +48,10 @@ public class Birb : MonoBehaviour {
             transform.forward = f2;
         }
 	}
+
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.collider.GetComponent<SnailSection>()) {
+            Checkpoint.active?.Respawn();
+        }
+    }
 }
