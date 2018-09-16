@@ -8431,7 +8431,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -28941,7 +28941,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4186610400552344, guid: a245b6b8a176bc84abeb4ea8b590d72f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -25.76
+      value: -42.37
       objectReference: {fileID: 0}
     - target: {fileID: 4186610400552344, guid: a245b6b8a176bc84abeb4ea8b590d72f, type: 2}
       propertyPath: m_LocalPosition.y
@@ -28970,6 +28970,16 @@ Prefab:
     - target: {fileID: 4186610400552344, guid: a245b6b8a176bc84abeb4ea8b590d72f, type: 2}
       propertyPath: m_RootOrder
       value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 114992655794848636, guid: a245b6b8a176bc84abeb4ea8b590d72f,
+        type: 2}
+      propertyPath: distance
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114992655794848636, guid: a245b6b8a176bc84abeb4ea8b590d72f,
+        type: 2}
+      propertyPath: cycleTime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a245b6b8a176bc84abeb4ea8b590d72f, type: 2}
