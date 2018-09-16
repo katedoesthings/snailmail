@@ -6,6 +6,7 @@ public class Birb : MonoBehaviour {
     public float distance;
     public float down;
     public float cycleTime = 5;
+    public AudioSource caw;
     
     private Vector3 v1;
     private Vector3 v2;
@@ -34,6 +35,11 @@ public class Birb : MonoBehaviour {
         } else if (progress < cycleTime * 0.5f) {
             transform.position = Vector3.Lerp(v2, v3, progress * 4.0f / 5.0f - 1.0f);
             transform.forward = f1;
+            if (!caw.isPlaying)
+            {
+                caw.Play();
+            }
+            
         } else if (progress < cycleTime * 0.75f) {
             transform.position = Vector3.Lerp(v3, v2, progress * 4.0f / 5.0f - 2.0f);
             transform.forward = f2;

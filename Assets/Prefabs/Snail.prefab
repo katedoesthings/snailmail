@@ -1742,6 +1742,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4385130769867586}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114170322052386596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1777,6 +1781,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4972559127323298}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114240632842766724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1797,6 +1805,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4050199689277864}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114284078536265478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1817,6 +1829,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4360772752183854}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114356778877986808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1849,6 +1865,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4555514928415730}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114445970677756600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1869,6 +1889,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4787378314692084}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114493509620682276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1900,6 +1924,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4498332505350574}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114874322316108192
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1920,6 +1948,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4922803114187190}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114918178945557676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1940,6 +1972,10 @@ MonoBehaviour:
   sticky: 1
   meshNode: {fileID: 4042308646591094}
   rotationToApply: {x: 0, y: 90, z: 0}
+  onIce: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1025
 --- !u!114 &114945375480205498
 MonoBehaviour:
   m_ObjectHideFlags: 1

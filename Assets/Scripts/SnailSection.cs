@@ -31,8 +31,13 @@ public class SnailSection : MonoBehaviour {
 
     private float drag;
 
+    public bool onIce;
+
+    public LayerMask groundLayers;
+
 	// Use this for initialization
 	void Awake () {
+        onIce = false;
         rb = GetComponent<Rigidbody>();
         mat = GetComponent<MeshRenderer>().material;
         drag = rb.drag;
@@ -57,14 +62,20 @@ public class SnailSection : MonoBehaviour {
         grounded = false;
         stuckNormal = Vector3.zero;
         groundNormal = Vector3.zero;
-        if (Physics.Raycast(new Ray(transform.position, -transform.up), out hit, raycastDistance + radius - 0.05f, 1)) {
-            groundNormal = hit.normal;
-            bool sticc = sticky && (head == this || !head.isStuck || head.stuckNormal == hit.normal);
-            if (sticc) {
-                stuckNormal = hit.normal;
-                rb.AddForceAtPosition(stuckNormal * -stickyStrength, transform.position - transform.up * radius, ForceMode.Acceleration);
+        if (Physics.Raycast(new Ray(transform.position, -transform.up), out hit, raycastDistance + radius - 0.05f, groundLayers)) {
+            if(hit.collider.gameObject.layer == 0)
+            {
+                groundNormal = hit.normal;
+                bool sticc = sticky && (head == this || !head.isStuck || head.stuckNormal == hit.normal);
+                if (sticc)
+                {
+                    stuckNormal = hit.normal;
+                    rb.AddForceAtPosition(stuckNormal * -stickyStrength, transform.position - transform.up * radius, ForceMode.Acceleration);
+                }
+                grounded = true;
             }
-            grounded = true;
+            onIce = (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ice"));
+
         }
 
         //rb.drag = rb.angularDrag = isStuck ? drag : 0;
