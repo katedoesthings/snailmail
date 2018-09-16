@@ -2163,7 +2163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   system: {fileID: 198598975040657218}
-  active: 1
+  active: 0
   flame: {fileID: 82185348982308772}
 --- !u!114 &114413047715505962
 MonoBehaviour:
