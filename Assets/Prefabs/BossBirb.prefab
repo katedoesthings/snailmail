@@ -2353,6 +2353,7 @@ MonoBehaviour:
   attackDelay: 15
   flameTime: 4
   caw: {fileID: 82200833333692390}
+  maxHealth: 1
   flamez: {fileID: 198000386094037898}
 --- !u!136 &136692174875963954
 CapsuleCollider:
@@ -2361,12 +2362,12 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1031639326897624}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 5.62
-  m_Height: 21.22
+  m_Radius: 3.27
+  m_Height: 18.795189
   m_Direction: 1
-  m_Center: {x: 0, y: 0.79, z: 0.56451225}
+  m_Center: {x: -0.78999996, y: 0.98122025, z: 4.01}
 --- !u!137 &137363079784435296
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2382,7 +2383,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 47aa82529e9be9b41a39d4d5df0d1fc5, type: 2}
+  - {fileID: 2100000, guid: 88a8d6c1b2cbff242b7fd35f66df014a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
