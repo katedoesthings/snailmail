@@ -6,6 +6,7 @@ public class MusicPlayer : MonoBehaviour {
     private AudioSource[] versions;
 
     public float fadeTime;
+    public float maxVolume;
 
     private float fadeAmount;
 
@@ -59,7 +60,7 @@ public class MusicPlayer : MonoBehaviour {
     private void Update() {
         if (fadingOut >= 0) {
             var fo = versions[fadingOut];
-            fo.volume = Mathf.MoveTowards(fo.volume, 0, Time.deltaTime / fadeTime);
+            fo.volume = Mathf.MoveTowards(fo.volume, 0, Time.deltaTime * maxVolume / fadeTime);
             if (fo.volume == 0) {
                 fo.Stop();
             }
@@ -67,7 +68,7 @@ public class MusicPlayer : MonoBehaviour {
 
         if (currentVersion >= 0) {
             var cv = versions[currentVersion];
-            cv.volume = Mathf.MoveTowards(cv.volume, 1, Time.deltaTime / fadeTime);
+            cv.volume = Mathf.MoveTowards(cv.volume, maxVolume, Time.deltaTime * maxVolume / fadeTime);
         }
     }
 }

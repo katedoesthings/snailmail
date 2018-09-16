@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf71c36cbc4d3e4ebabd0b59da6d895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: e8ef08c0ecf6473439efe6822eca7cff, type: 3}
+  sound: {fileID: 8300000, guid: ebce921b224272c4cbe8d8bc6f475985, type: 3}
 --- !u!198 &198384460031641512
 ParticleSystem:
   m_ObjectHideFlags: 1
