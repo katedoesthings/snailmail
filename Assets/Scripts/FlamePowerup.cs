@@ -7,12 +7,17 @@ public class FlamePowerup : MonoBehaviour {
 
     public bool active;
     public AudioSource flame;
+
+    public void Ignite() {
+        active = true;
+        var em = system.emission;
+        em.enabled = true;
+    }
+
     private void OnCollisionEnter(Collision collision) {
         if (!active && collision.collider.CompareTag("Shroom")) {
-            active = true;
+            Ignite();
             flame.Play();
-            var em = system.emission;
-            em.enabled = true;
         }
 
         if (active) {
