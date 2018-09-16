@@ -13,6 +13,7 @@ public class CameraControl : MonoBehaviour {
         angles = transform.eulerAngles;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        track = FindObjectOfType<SnailMovement>().transform;
 	}
 
     private void Update() {

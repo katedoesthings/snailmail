@@ -13,6 +13,8 @@ public class BossBirb : MonoBehaviour {
     public AudioSource hitNoise;
     public ParticleSystem flamez;
 
+    public Texture2D healthImage;
+
     private Vector3 attackStart;
     private Vector3 downTarget;
     private Vector3 fwdTarget;
@@ -75,6 +77,14 @@ public class BossBirb : MonoBehaviour {
             em.enabled = false;
         }
 	}
+
+    private void OnGUI() {
+        if (snail && snail.transform.position.y > attackY) {
+            for (int i = 0; i < curHealth; i++) {
+                GUI.DrawTexture(new Rect(Screen.width - 75 * (i + 1), 20, 50, 50), healthImage);
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider collision) {
         if (collision.GetComponent<SnailSection>()) {
