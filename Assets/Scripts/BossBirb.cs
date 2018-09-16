@@ -7,7 +7,11 @@ public class BossBirb : MonoBehaviour {
     public float attackY;
     public float attackTime = 5;
     public float attackDelay = 10;
+    public float flameTime = 2;
     public AudioSource caw;
+    public int maxHealth;
+    public AudioSource hitNoise;
+    public ParticleSystem flamez;
 
     private Vector3 attackStart;
     private Vector3 downTarget;
@@ -18,11 +22,14 @@ public class BossBirb : MonoBehaviour {
     private float attackStartTime;
     private bool attacking;
     private Vector3 startpos;
+    private float flameStart = -100;
+    private int curHealth;
 
 	// Use this for initialization
 	void Start () {
         startpos = transform.position;
         lastAttackTime = Time.time;
+        curHealth = maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -62,11 +69,30 @@ public class BossBirb : MonoBehaviour {
         } else {
             transform.position = startpos;
         }
+
+        if (Time.time - flameStart > flameTime) {
+            var em = flamez.emission;
+            em.enabled = false;
+        }
 	}
 
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.collider.GetComponent<SnailSection>()) {
+    private void OnTriggerEnter(Collider collision) {
+        if (collision.GetComponent<SnailSection>()) {
             Checkpoint.active?.Respawn();
+        }
+    }
+
+    public void Damage() {
+        var em = flamez.emission;
+        em.enabled = true;
+        flameStart = Time.time;
+        hitNoise.Play();
+        curHealth--;
+        if (curHealth <= 0) {
+            Destroy(this);
+            GetComponent<Collider>().isTrigger = false;
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<Rigidbody>().angularVelocity = Random.onUnitSphere;
         }
     }
 }

@@ -25,9 +25,14 @@ public class HurtBossFlame : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision) {
         var flame = collision.transform.root.GetComponentInChildren<FlamePowerup>();
-        if (flame.active) {
+        if (flame && flame.active) {
             em.enabled = true;
             remaining = burnTime;
+        }
+
+        var boss = collision.transform.root.GetComponent<BossBirb>();
+        if (boss && em.enabled) {
+            boss.Damage();
         }
     }
 }
