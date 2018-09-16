@@ -8,7 +8,11 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: crow_flapping_anim_03_lambert1_AlbedoTransparency
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+<<<<<<< HEAD
   m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
+=======
+  m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
+>>>>>>> b52d3809699f92d0e1bb79a891c44d1dfae0050d
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

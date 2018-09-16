@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlamePowerup : MonoBehaviour {
     public ParticleSystem system;
 
-    private bool active;
+    public bool active;
     public AudioSource flame;
     private void OnCollisionEnter(Collision collision) {
         if (!active && collision.collider.CompareTag("Shroom")) {
