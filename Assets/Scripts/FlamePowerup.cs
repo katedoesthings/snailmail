@@ -6,10 +6,11 @@ public class FlamePowerup : MonoBehaviour {
     public ParticleSystem system;
 
     private bool active;
-
+    public AudioSource flame;
     private void OnCollisionEnter(Collision collision) {
         if (!active && collision.collider.CompareTag("Shroom")) {
             active = true;
+            flame.Play();
             var em = system.emission;
             em.enabled = true;
         }
