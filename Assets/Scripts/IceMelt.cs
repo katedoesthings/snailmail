@@ -9,6 +9,8 @@ public class IceMelt : MonoBehaviour {
     public float meltTime;
     public float curAmount;
 
+    public bool deactivate;
+
 
     public bool melting;
 
@@ -29,7 +31,11 @@ public class IceMelt : MonoBehaviour {
 
             if (curAmount == 0) {
                 melting = false;
-                col.gameObject.layer = LayerMask.NameToLayer("Default");
+                if (deactivate) {
+                    col.enabled = false;
+                } else {
+                    col.gameObject.layer = LayerMask.NameToLayer("Default");
+                }
             }
         }
 	}

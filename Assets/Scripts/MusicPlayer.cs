@@ -9,7 +9,7 @@ public class MusicPlayer : MonoBehaviour {
 
     private float fadeAmount;
 
-    private List<MusicVolume> volumes;
+    private List<MusicVolume> volumes = new List<MusicVolume>();
 
     public static MusicPlayer inst { get; private set; }
 

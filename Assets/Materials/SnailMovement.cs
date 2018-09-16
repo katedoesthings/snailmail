@@ -15,6 +15,8 @@ public class SnailMovement : MonoBehaviour {
 
     public int climbSections = 3;
 
+    public float killY = -10;
+
     public Transform[] eyeStalks;
 
 	// Use this for initialization
@@ -116,6 +118,10 @@ public class SnailMovement : MonoBehaviour {
         Quaternion q2 = Quaternion.LookRotation(-eyeFwd, -eyeRight);
         eyeStalks[1].transform.rotation = Quaternion.RotateTowards(eyeStalks[1].transform.rotation, q2, Time.deltaTime * 360);
 
+
+        if (transform.position.y < killY) {
+            Checkpoint.active?.Respawn();
+        }
     }
 
     private void LateUpdate() {
