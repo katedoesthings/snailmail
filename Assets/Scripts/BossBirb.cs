@@ -10,7 +10,7 @@ public class BossBirb : MonoBehaviour {
     public float flameTime = 2;
     public AudioSource caw;
     public int maxHealth;
-
+    public AudioSource hitNoise;
     public ParticleSystem flamez;
 
     private Vector3 attackStart;
@@ -86,6 +86,7 @@ public class BossBirb : MonoBehaviour {
         var em = flamez.emission;
         em.enabled = true;
         flameStart = Time.time;
+        hitNoise.Play();
         curHealth--;
         if (curHealth <= 0) {
             Destroy(this);
